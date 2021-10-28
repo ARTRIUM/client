@@ -1,6 +1,7 @@
 package com.example.everytranslation.utils
 
 import android.annotation.SuppressLint
+import android.util.Log
 import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
 import com.google.gson.Gson
@@ -44,13 +45,13 @@ class MyStompClient {
             .connectTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
             .build()
 
-        return StompClient(client, INTERVAL_MILLIS).apply { this@apply.url = EC2_URL + END_POINT }
+        return StompClient(client, INTERVAL_MILLIS).apply { this@apply.url = LOCAL_URL + END_POINT }
     }
 
     @SuppressLint("CheckResult")
-
     private fun connect(stompClient : StompClient) {
         stomp.connect().subscribe({
+            Log.d("스톰프", "ㅋㅋㅋㅋㅋㅋ")
             if(it.type != Event.Type.OPENED){
                 logger.info("cannot connect via stomp client")
             }

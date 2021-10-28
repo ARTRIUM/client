@@ -5,7 +5,6 @@ plugins {
 }
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs"
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 30
