@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.everytranslation.ui.auth.AuthViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/everygreen"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        tools:context=".ui.auth.SignUpActivity">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="40dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="30dp"
+                    android:src="@drawable/logo" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/wemakebold"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/purple_light"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="@font/wemakeregular"
+                    android:text="Thank you for visiting."
+                    android:textColor="@color/purple"
+                    android:textSize="20dp" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:fontFamily="@font/wemakeregular"
+                    android:textColor="@color/purple"
+                    android:textSize="13dp" />
+
+                <EditText
+                    android:id="@+id/sign_up_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="15dp"
+                    android:textCursorDrawable="@null"
+                    android:background="@drawable/bg_border_white"
+                    android:cursorVisible="true"
+                    android:drawableLeft="@drawable/ic_person"
+                    android:drawablePadding="15dp"
+                    android:elevation="3dp"
+                    android:fontFamily="@font/wemakeregular"
+                    android:hint="@string/user_name"
+                    android:importantForAutofill="no"
+                    android:inputType="textNoSuggestions|textPersonName"
+                    android:text="@={viewmodel.signupName}"
+                    android:textColorHint="@color/purple"
+                    android:textColor="@color/purple_light"
+                    android:textSize="15sp"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/sign_up_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_border_white"
+                    android:cursorVisible="true"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:drawablePadding="15dp"
+                    android:elevation="3dp"
+                    android:fontFamily="@font/wemakeregular"
+                    android:hint="@string/login_password"
+                    android:importantForAutofill="no"
+                    android:inputType="textNoSuggestions|textPassword"
+                    android:text="@={viewmodel.signupPassword}"
+                    android:textColorHint="@color/purple"
+                    android:textColor="@color/purple_light"
+                    android:textSize="15sp"
+                    tools:ignore="LabelFor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/sign_up_email_text"
+                        android:layout_width="240dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_border_white"
+                        android:cursorVisible="true"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:drawablePadding="15dp"
+                        android:elevation="3dp"
+                        android:fontFamily="@font/wemakeregular"
+                        android:hint="@string/login_id"
+                        android:importantForAutofill="no"
+                        android:inputType="textNoSuggestions|textEmailAddress"
+                        android:text="@={viewmodel.signupEmail}"
+                        android:textColorHint="@color/purple"
+                        android:textColor="@color/purple_light"
+                        android:textSize="15sp"
+                        tools:ignore="LabelFor" />
+
+                    <Button
+                        android:id="@+id/sign_up_email_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight=".20"
+                        android:background="@drawable/btn_purple"
+                        android:fontFamily="@font/wemakeregular"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:onClick="@{()->viewmodel.getVerifyCode()}"
+                        android:paddingVertical="10dp"
+                        android:text="send"
+                        android:textAllCaps="false"
+                        android:textColor="@color/purple_light" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/wemakeregular"
+                    android:text="Sent on email to your email address. Please check"
+                    android:textColor="@color/purple"
+                    android:textSize="13dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/sign_up_verify_text"
+                        android:layout_width="240dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="7dp"
+                        android:background="@drawable/bg_border_white"
+                        android:cursorVisible="true"
+                        android:drawableLeft="@drawable/ic_authentication"
+                        android:drawablePadding="15dp"
+                        android:elevation="3dp"
+                        android:text="@={viewmodel.permissionCode}"
+                        android:fontFamily="@font/wemakeregular"
+                        android:hint="@string/Authentication"
+                        android:importantForAutofill="no"
+                        android:inputType="textNoSuggestions|number"
+                        android:textColorHint="@color/purple"
+                        android:textColor="@color/purple_light"
+                        android:textSize="15sp"
+                        tools:ignore="LabelFor" />
+
+                    <Button
+                        android:id="@+id/sign_up_verify_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight=".20"
+                        android:background="@drawable/btn_purple"
+                        android:fontFamily="@font/wemakeregular"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:paddingVertical="10dp"
+                        android:onClick="@{()->viewmodel.postVerifyCode()}"
+                        android:text="verify"
+                        android:textAllCaps="false"
+                        android:textColor="@color/purple_light" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/sign_up_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_border_white"
+                    android:cursorVisible="true"
+                    android:drawableLeft="@drawable/ic_phone"
+                    android:drawablePadding="15dp"
+                    android:elevation="3dp"
+                    android:fontFamily="@font/wemakeregular"
+                    android:hint="@string/phone"
+                    android:importantForAutofill="no"
+                    android:inputType="textNoSuggestions|phone"
+                    android:text="@={viewmodel.signupPhone}"
+                    android:textColorHint="@color/purple"
+                    android:textColor="@color/purple_light"
+                    android:textSize="15sp"
+                    tools:ignore="LabelFor" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/wemakeregular"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="@color/purple"
+                    android:textSize="13dp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="30dp"
+                    android:checkedButton="@={viewmodel.signupLanguageRadio}"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_korean"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/purple_light"
+                        android:text="KOREAN"
+                        android:textColor="@color/purple_light" />
+
+                    <RadioButton
+                        android:id="@+id/radio_english"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/purple_light"
+                        android:text="ENGLISH"
+                        android:textColor="@color/purple_light" />
+
+                    <RadioButton
+                        android:id="@+id/radio_chinese"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/purple_light"
+                        android:text="CHINESE"
+                        android:textColor="@color/purple_light" />
+                </RadioGroup>
+
+
+                <Button
+                    android:id="@+id/sign_up_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/button_background_purple"
+                    android:fontFamily="@font/wemakebold"
+                    android:onClick="@{() -> viewmodel.checkSignUpFeild()}"
+                    android:text="Sign up"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="25dp">
+
+                </Button>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</layout>
