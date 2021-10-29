@@ -90,7 +90,7 @@
     <string name="chat_info">미팅룸 정보</string>
     <string name="chat_name_setting">미팅 이름 설정</string>
     <string name="chat_participant">참가자</string>
-    <string name="chat_participant_add">미팅 참가자 추가</string>
+    <string name="chat_participant_add">미팅 참가자 리스트</string>
     <string name="title_activity_maps">Map</string>
 
     <!--message-->
