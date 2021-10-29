@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.everytranslation.MainActivity
 import com.example.everytranslation.R
 import com.example.everytranslation.data.repository.AuthRepository
-import com.example.everytranslation.data.request.UserService
 import com.example.everytranslation.databinding.ActivityLoginBinding
+import com.example.everytranslation.db.AppDatabase
 import com.example.everytranslation.ui.auth.AuthListener
 import com.example.everytranslation.ui.auth.AuthViewModel
 import com.example.everytranslation.ui.auth.AuthViewModelFactory
@@ -18,6 +18,7 @@ import com.example.everytranslation.utils.MyApplication
 import com.example.everytranslation.utils.NetworkConnection
 import com.example.everytranslation.utils.NetworkStatus
 import com.example.everytranslation.utils.toast
+import com.example.everytranslation.db.dto.User
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -66,7 +67,14 @@ class SignInActivity : AppCompatActivity(),AuthListener {
                 MyApplication.prefs.setUserId(it.response.userId)
                 MyApplication.prefs.setUserName(it.response.userName)
                 MyApplication.prefs.setUserLanguage(it.response.userLanguage)
+
+                Thread{
+                    val user = User(it.response.userId, it.response.userName, MyApplication.prefs.getUserPass(), MyApplication.prefs.getUserEmail(), "", it.response.userLanguage)
+                    AppDatabase.getInstance(applicationContext).userDao().insert(user)
+                }.start()
+
                 val intent = Intent(this,MainActivity::class.java)
+                intent.putExtra("user", User(it.response.userId, it.response.userName, MyApplication.prefs.getUserPass(), MyApplication.prefs.getUserEmail(), "", it.response.userLanguage))
                 startActivity(intent)
                 finish()
             }
