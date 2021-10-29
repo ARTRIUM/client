@@ -25,12 +25,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.chat.ChatTranslationActivity"
+        <activity android:name=".ui.navigation.home.InviteListFragment"></activity>
+        <activity android:name=".ui.navigation.home.invite.InviteFriendListFragment" />
+        <activity
+            android:name=".ui.chat.ChatTranslationActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.navigation.friend.AddFriendActivity" />
-        <activity android:name=".ui.SplashActivity">
-
-        </activity>
+        <activity android:name=".ui.SplashActivity" />
         <activity android:name=".ui.chat.ChatDrawerActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -67,7 +68,6 @@
         <activity
             android:name=".ui.chat.ChatActivity"
             android:windowSoftInputMode="adjustResize">
-
 
         </activity>
         <activity android:name=".ui.navigation.home.MeetingReservationActivity" />
