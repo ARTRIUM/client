@@ -15,6 +15,7 @@ import com.example.everytranslation.data.repository.HomeRepository
 import com.example.everytranslation.databinding.FragmentHomeBinding
 import com.example.everytranslation.ui.activity.MypageActivity
 import com.example.everytranslation.ui.chat.ChatActivity
+import com.example.everytranslation.ui.chat.ChatDrawerActivity
 import com.example.everytranslation.utils.MyApplication
 import com.example.everytranslation.utils.NetworkConnection
 import com.example.everytranslation.utils.NetworkStatus
@@ -55,7 +56,9 @@ class HomeFragment : Fragment(), HomeListener {
         }
 
         fragmentbinding.meetStart.setOnClickListener{
-            viewModel.startMeet()
+            var intent = Intent(getActivity(),ChatDrawerActivity::class.java)
+            startActivity(intent)
+//            viewModel.startMeet()
         }
 
         //tool bar

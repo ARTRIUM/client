@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="viewmodel"
-            type="com.example.everytranslation.ui.auth.AuthViewModel" />
+
+        <!--        <variable-->
+        <!--            name="viewmodel"-->
+        <!--            type="com.example.everytranslation.ui.auth.AuthViewModel" />-->
     </data>
 
     <LinearLayout
@@ -17,7 +17,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:background="@color/purple_light"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context=".ui.navigation.home.InviteListFragment">
 
 
         <LinearLayout
@@ -35,8 +36,8 @@
                     android:id="@+id/chatInfoText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/wemakebold"
                     android:text="@string/chat_info"
                     android:textColor="@color/everygreen"
@@ -47,16 +48,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_below="@+id/chatInfoText"
+                    android:layout_marginBottom="30dp"
                     android:background="@drawable/btn_round_background_purple"
                     android:cursorVisible="true"
                     android:fontFamily="@font/wemakeregular"
                     android:hint="@string/newPassword"
-                    android:paddingLeft="15dp"
-                    android:layout_marginBottom="30dp"
                     android:importantForAutofill="no"
                     android:inputType="textNoSuggestions|textPassword"
+                    android:paddingLeft="15dp"
                     android:textColorHint="@color/purple_light"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
 
             </RelativeLayout>
 
@@ -68,8 +69,8 @@
                     android:id="@+id/chatNameText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/wemakebold"
                     android:text="@string/chat_name_setting"
                     android:textColor="@color/everygreen"
@@ -80,14 +81,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_below="@+id/chatNameText"
+                    android:layout_marginBottom="30dp"
                     android:background="@drawable/btn_round_background_purple"
                     android:cursorVisible="true"
                     android:fontFamily="@font/wemakeregular"
                     android:hint="이도윤"
                     android:paddingLeft="15dp"
-                    android:layout_marginBottom="30dp"
                     android:textColorHint="@color/purple"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/setMeetName"
@@ -99,14 +100,13 @@
                     android:fontFamily="@font/wemakeregular"
                     android:text="설정"
                     android:textColor="@color/purple_light"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/participantText"
@@ -125,15 +125,15 @@
                     android:layout_height="30dp"
                     android:layout_below="@+id/participantText"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/plus"/>
+                    android:background="@drawable/plus" />
 
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="30dp"
                     android:layout_below="@+id/participantText"
-                    android:layout_toRightOf="@+id/participantAdd"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="7dp"
+                    android:layout_toRightOf="@+id/participantAdd"
                     android:fontFamily="@font/wemakebold"
                     android:text="@string/chat_participant_add"
                     android:textColor="@color/everygreen"
@@ -141,6 +141,29 @@
 
 
             </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/invitelistfragment_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="30dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            <Button
+                android:id="@+id/createRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="방 생성"
+                android:layout_gravity="center"
+                android:layout_below="@+id/participantText"
+                android:background="@drawable/chat_box" />
+
         </LinearLayout>
+
+
     </LinearLayout>
 </layout>

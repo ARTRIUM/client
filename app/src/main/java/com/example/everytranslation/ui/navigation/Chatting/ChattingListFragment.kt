@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -22,9 +23,7 @@ import com.example.everytranslation.db.AppDatabase
 import com.example.everytranslation.db.dto.ChatRoom
 import com.example.everytranslation.db.dto.User
 import com.example.everytranslation.ui.chat.ChatActivity
-import com.example.everytranslation.ui.chat.ChatTranslationActivity
-import com.example.everytranslation.ui.navigation.friend.AddFriendActivity
-import java.util.logging.Level.INFO
+
 
 class ChattingListFragment(val user : User) : Fragment() {
 
@@ -41,7 +40,7 @@ class ChattingListFragment(val user : User) : Fragment() {
 
 
         val view:View = inflater.inflate(R.layout.fragment_chatting_list, container, false)
-        val btn_addRoom : ImageView = view.findViewById(R.id.chatlist_add_friends);
+        val btn_addRoom : Button = view.findViewById(R.id.chatlist_add_friends);
 
         btn_addRoom.setOnClickListener(){
             val intent = Intent(activity, ChatActivity::class.java )
