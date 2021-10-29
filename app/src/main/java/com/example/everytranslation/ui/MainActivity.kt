@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.action_chatting -> {
-                        chatListFragment = ChattingListFragment.newInstance(user)
+                        chatListFragment = ChattingListFragment.newInstance()
                         supportFragmentManager.beginTransaction().replace(R.id.main_content,chatListFragment).commit()
                         return@setOnItemSelectedListener true
                     }

@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.net.CookieManager
 
 object ApiRequestFactory {
-    private const val baseUrl = "http://3.36.49.199"
+    private const val baseUrl = "http://10.0.2.2:8080"
 
     val headerInterceptor = Interceptor {
         val request = it.request()
