@@ -12,6 +12,7 @@ import com.example.everytranslation.MainActivity
 import com.example.everytranslation.R
 import com.example.everytranslation.data.ChatDTO
 import com.example.everytranslation.data.model.ChatMeDTO
+import com.example.everytranslation.data.service.MessageApiService
 import com.example.everytranslation.databinding.ActivityChatBinding
 import com.example.everytranslation.databinding.ChatDetailBinding
 import java.text.SimpleDateFormat
@@ -20,6 +21,8 @@ import java.util.*
 
 class ChatActivity : AppCompatActivity() {
 
+
+    private val messageApiService = MessageApiService.getNewInstance()
 
     private lateinit var binding: ActivityChatBinding
     private var flag: Int = 0
@@ -43,11 +46,11 @@ class ChatActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.back.setOnClickListener {
+        binding.back.setOnClickListener { // 뒤로가기 버튼
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-        binding.chatMike.setOnClickListener {
+        binding.chatMike.setOnClickListener { // 마이크버튼
             if (flag == 0) {
                 changeImage(R.drawable.ic_mike_off)
                 flag = 1;
@@ -74,8 +77,12 @@ class ChatActivity : AppCompatActivity() {
         val t_date = Date(current)
         val t_dateFormat = SimpleDateFormat("kk:mm", Locale("ko", "KR"))
         val str_time = t_dateFormat.format(t_date)
-        val chat = ChatMeDTO(binding.chatText.text.toString(), str_time, false)
-        data.add(chat)
+
+//        val chat = ChatDTO();
+
+        messageApiService.sendMessage(1,1,binding.chatText.text.toString());
+
+        
         binding.chatContent.adapter?.notifyDataSetChanged()
     }
 
