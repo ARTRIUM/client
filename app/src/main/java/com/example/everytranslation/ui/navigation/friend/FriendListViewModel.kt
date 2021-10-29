@@ -6,12 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.everytranslation.data.model.ApiResult
-import com.example.everytranslation.data.repository.FriendRepository
 import com.example.everytranslation.ui.auth.AuthListener
 import com.example.everytranslation.utils.NetworkStatus
 import kotlinx.coroutines.launch
 
-class FriendListViewModel(private val friendRepository: FriendRepository) : ViewModel() {
+class FriendListViewModel() : ViewModel() {
 
     // Add friend
     var addFriendEmail = ObservableField<String>()

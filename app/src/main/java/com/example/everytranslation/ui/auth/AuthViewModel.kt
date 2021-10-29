@@ -9,12 +9,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.everytranslation.R
 import com.example.everytranslation.data.model.*
-import com.example.everytranslation.data.repository.AuthRepository
+import com.example.everytranslation.data.service.UserApiService
 import com.example.everytranslation.utils.MyApplication
 import com.example.everytranslation.utils.NetworkStatus
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
+class AuthViewModel() : ViewModel() {
 
     //sign up field
     var signupName = ObservableField<String>()
@@ -43,7 +43,7 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
         if(NetworkStatus.status){
             Log.d("verifyCode","인증번호 요청 됐다")
             _signUpLoading.postValue(true)
-            _getResponse.value = authRepository.requestVerifyCode(signupEmail.get()!!)
+            _getResponse.value = UserApiService.instance.requestVerifyCode(signupEmail.get()!!)
         }else{
             authSignUpListener?.onFailure(networkErrorString,99)
         }
@@ -56,7 +56,7 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
     fun postVerifyCode() = viewModelScope.launch {
         if(NetworkStatus.status){
             _signUpLoading.postValue(true)
-            _verifyPostResponse.value = authRepository.requestVerify(
+            _verifyPostResponse.value = UserApiService.instance.requestVerify(
                 VerifyEmailDTO(signupEmail.get()!!,permissionCode.get()!!)
             )
         }
@@ -82,7 +82,7 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
                 else -> "NULL"
             }
             Log.d("language",language)
-            _signUpResponse.value = authRepository.requestSignUp(
+            _signUpResponse.value = UserApiService.instance.signUp(
                 SignUpForm(signupName.get()!!, signupPassword.get()!!, signupEmail.get()!!, language,signUpResponseCode)
             )
 
@@ -106,7 +106,7 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
                 MyApplication.prefs.setUserEmail(signInEmail.get()!!)
                 MyApplication.prefs.setUserPass(signInPassword.get()!!)
             }
-            _signInResponse.value = authRepository.requestSignIn(
+            _signInResponse.value = UserApiService.instance.login(
                 SignInForm(signInEmail.get()!!, signInPassword.get()!!)
             )
             _signInLoading.postValue(false)

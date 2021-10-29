@@ -6,12 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.everytranslation.data.model.ApiResult
-import com.example.everytranslation.data.repository.HomeRepository
+
 import com.example.everytranslation.utils.MyApplication
 import com.example.everytranslation.utils.NetworkStatus
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
+class HomeViewModel() : ViewModel() {
 
     // homeListener
     var homeListener: HomeListener? = null
@@ -24,7 +24,6 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     fun startMeet() = viewModelScope.launch {
         if (NetworkStatus.status) {
             Log.d("startMeet","미팅시작")
-            _startMeet.value = homeRepository.startMeet(MyApplication.prefs.getUserId())
         } else {
             homeListener?.onFailure(networkErrorString, 99)
         }
