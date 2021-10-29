@@ -20,6 +20,7 @@ import com.example.everytranslation.R
 import com.example.everytranslation.adapter.InviteListRecyclerViewAdapter
 import com.example.everytranslation.data.FriendDTO
 import com.example.everytranslation.data.model.CreateRoomDTO
+import com.example.everytranslation.data.model.UserLanguage
 import com.example.everytranslation.data.service.FriendApiService
 import com.example.everytranslation.data.service.RoomApiService
 import com.example.everytranslation.data.service.util.rest.RestApiService.Companion.instance
@@ -40,18 +41,21 @@ class ChatDrawerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_drawer)
 
+        var viewAdapter = InviteListRecyclerViewAdapter(applicationContext,friendList,inviteList)
+
         val chatNameText = findViewById<TextView>(R.id.chatNameText)
         val btn_make = findViewById<Button>(R.id.createRoom)
-        val adapter = InviteListRecyclerViewAdapter(applicationContext,friendList,inviteList)
-        val invitelistfragmentRecyclerview = findViewById<RecyclerView>(R.id.invitelistfragment_recyclerview)
+        val inviteListFragmentRecyclerview = findViewById<RecyclerView>(R.id.invitelistfragment_recyclerview)
 
-        invitelistfragmentRecyclerview.adapter = adapter
-        invitelistfragmentRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
-        invitelistfragmentRecyclerview.setHasFixedSize(true)
+        inviteListFragmentRecyclerview.adapter = viewAdapter
+        inviteListFragmentRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
+        inviteListFragmentRecyclerview.setHasFixedSize(true)
+
+
 
         FriendApiService.instance.getFriendAll(){
             for(friend in it){
-                adapter.addInvite(friend)
+                viewAdapter.addInvite(friend)
             }
         }
 
