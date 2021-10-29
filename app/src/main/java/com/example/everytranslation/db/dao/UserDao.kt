@@ -7,7 +7,7 @@ import com.example.everytranslation.db.dto.User
 @Dao
 interface UserDao {
     @Query("SELECT * FROM USER WHERE userId == :userId")
-    fun get(userId : Int) : User
+    fun get(userId : Long) : User
 
     @Query("SELECT * FROM USER WHERE userId == :userId")
     fun getLiveData(userId : Int) : LiveData<User>

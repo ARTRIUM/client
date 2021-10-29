@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 data class User (
     @SerializedName("userId")
     @PrimaryKey
-    val userId : Int,
+    val userId : Long,
 
     @SerializedName("name")
     val name : String,
