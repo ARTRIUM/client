@@ -51,7 +51,7 @@ class MyStompClient {
     @SuppressLint("CheckResult")
     private fun connect(stompClient : StompClient) {
         stomp.connect().subscribe({
-            Log.d("스톰프", "ㅋㅋㅋㅋㅋㅋ")
+            logger.info("Stomp Connect")
             if(it.type != Event.Type.OPENED){
                 logger.info("cannot connect via stomp client")
             }

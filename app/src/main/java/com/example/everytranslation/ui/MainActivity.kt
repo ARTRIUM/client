@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.everytranslation.databinding.ActivityMainBinding
+import com.example.everytranslation.db.dto.User
 import com.example.everytranslation.ui.activity.MypageActivity
 import com.example.everytranslation.ui.navigation.Chatting.ChattingListFragment
 import com.example.everytranslation.ui.navigation.friend.FriendsListFragment
 import com.example.everytranslation.ui.navigation.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var user : User
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var chatListFragment: ChattingListFragment
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.action_chatting -> {
-                        chatListFragment = ChattingListFragment.newInstance()
+                        chatListFragment = ChattingListFragment.newInstance(user)
                         supportFragmentManager.beginTransaction().replace(R.id.main_content,chatListFragment).commit()
                         return@setOnItemSelectedListener true
                     }
