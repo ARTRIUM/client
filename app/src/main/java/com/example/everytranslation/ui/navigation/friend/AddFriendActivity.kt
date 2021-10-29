@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.everytranslation.databinding.ActivityAddFriendBinding
 import com.example.hanium.SignUpActivity
+import android.R
+import com.example.everytranslation.MainActivity
+
 
 class AddFriendActivity : AppCompatActivity() {
     val binding by lazy { ActivityAddFriendBinding.inflate(layoutInflater) }
@@ -23,8 +26,12 @@ class AddFriendActivity : AppCompatActivity() {
             }
         }
         binding.addFriendExit.setOnClickListener{
-            val intent = Intent(this,FriendsListFragment::class.java)
+//            val intent = Intent(this,FriendsListFragment::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+//            val transaction = supportFragmentManager.beginTransaction().add(R.id)
+
         }
     }
+
 }
