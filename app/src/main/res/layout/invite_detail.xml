@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/invite_image_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:src="@drawable/people"/>
+
+    <TextView
+        android:id="@+id/invite_name"
+        android:text="이름"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/invite_nationality"
+        android:layout_width="60dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/btn_purple"
+        android:text="korean"
+        android:textColor="@color/everygreen"
+        android:textSize="10dp"
+        />
+    <!-- style="?android:attr/borderlessButtonStyle"-->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <CheckBox
+        android:id="@+id/checkbox_invite_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/chat_box"
+        android:textSize="8dp"
+        />
+
+</LinearLayout>
