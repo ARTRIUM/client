@@ -29,7 +29,6 @@ class ChattingListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
 
-
         fragmentbinding = FragmentChattingListBinding.inflate(inflater, container, false)
 
         fragmentbinding.chattinglistfragmentRecyclerview.adapter = ChattingListRecyclerviewAdapter()
@@ -50,12 +49,12 @@ class ChattingListFragment : Fragment() {
             chatDTOs.clear()
 
             // friends data list loading
-            chatDTOs.add(ChatDTO("people1","회의 시작할까요?","url1"))
-            chatDTOs.add(ChatDTO("people2","bbb","url2"))
-            chatDTOs.add(ChatDTO("people3","ccc","url3"))
-            chatDTOs.add(ChatDTO("people4","ddd","url4"))
-            chatDTOs.add(ChatDTO("people5","eee","url5"))
-            chatDTOs.add(ChatDTO("people6","fff","url6"))
+//            chatDTOs.add(ChatDTO("people1","회의 시작할까요?","url1"))
+//            chatDTOs.add(ChatDTO("people2","bbb","url2"))
+//            chatDTOs.add(ChatDTO("people3","ccc","url3"))
+//            chatDTOs.add(ChatDTO("people4","ddd","url4"))
+//            chatDTOs.add(ChatDTO("people5","eee","url5"))
+//            chatDTOs.add(ChatDTO("people6","fff","url6"))
 
             notifyDataSetChanged()
         }
@@ -84,8 +83,8 @@ class ChattingListFragment : Fragment() {
             }
 
             fun setChat(item : ChatDTO){
-                chatDetailBinding.chatDetailName.text = item.name
-                chatDetailBinding.chatDetailContent.text = item.content
+                chatDetailBinding.chatDetailName.text = item.userName
+                chatDetailBinding.chatDetailContent.text = item.message
             }
         }
     }
