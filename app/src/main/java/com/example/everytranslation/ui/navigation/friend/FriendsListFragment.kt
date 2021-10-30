@@ -19,14 +19,15 @@ import com.example.everytranslation.data.service.FriendApiService
 import com.example.everytranslation.databinding.FragmentFriendsListBinding
 import com.example.everytranslation.databinding.FriendDetailBinding
 import com.example.everytranslation.db.dto.Friend
+import com.example.everytranslation.db.dto.User
 
-class FriendsListFragment : Fragment() {
+class FriendsListFragment(val user : User) : Fragment() {
 
     private var friendList = ArrayList<Friend>()
 
     companion object{
-        fun newInstance() : FriendsListFragment {
-            return FriendsListFragment()
+        fun newInstance(user : User) : FriendsListFragment {
+            return FriendsListFragment(user)
         }
     }
 
@@ -53,6 +54,7 @@ class FriendsListFragment : Fragment() {
 
         btn_add_friend.setOnClickListener{
             val intent = Intent(activity,AddFriendActivity::class.java )
+            intent.putExtra("user", user)
             startActivity(intent)
         }
 
