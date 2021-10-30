@@ -6,7 +6,7 @@ import com.example.everytranslation.data.service.util.rest.RestApiService
 import com.example.everytranslation.data.service.util.rest.RestApiServiceCallback
 import com.example.everytranslation.db.dto.Message
 import com.example.everytranslation.utils.MyStompClient
-import java.util.function.Consumer
+import java.util.function.Consume
 import java.util.logging.Logger
 
 class MessageApiService() {

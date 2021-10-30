@@ -24,7 +24,9 @@ import com.example.everytranslation.utils.toast
 class HomeFragment(val user : User) : Fragment(), HomeListener {
 
     companion object{
-        fun newInstance(user:User) : HomeFragment {
+
+        fun newInstance(user : User) : HomeFragment {
+            Log.d("user:{}",user.name.toString());
             return HomeFragment(user)
         }
     }
@@ -50,6 +52,11 @@ class HomeFragment(val user : User) : Fragment(), HomeListener {
 
         initViewModel()
 
+        if (user.language == "KOREAN")
+            fragmentbinding.meetText.text = "안녕하세요, " + user.name + "님!"
+        else if (user.language == "ENGLISH")
+            fragmentbinding.meetText.text = "Hello, " + user.name + "!"
+
         fragmentbinding.meetReservation.setOnClickListener {
             val intent = Intent(getActivity(), MeetingReservationActivity::class.java)
             startActivity(intent)
@@ -66,6 +73,8 @@ class HomeFragment(val user : User) : Fragment(), HomeListener {
             val intent = Intent(activity, MypageActivity::class.java)
             startActivity(intent)
         }
+
+
         return fragmentbinding.root
     }
 
