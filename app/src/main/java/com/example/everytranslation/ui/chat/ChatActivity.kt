@@ -76,7 +76,6 @@ class ChatActivity : AppCompatActivity() {
             chatTextView.setText("")
         }
 
-
 //        binding.chatMike.setOnClickListener { // 마이크버튼
 //            if (flag == 0) {
 //                changeImage(R.drawable.ic_mike_off)

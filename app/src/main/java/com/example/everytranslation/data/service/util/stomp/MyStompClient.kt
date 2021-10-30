@@ -45,7 +45,7 @@ class MyStompClient {
             .connectTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
             .build()
 
-        return StompClient(client, INTERVAL_MILLIS).apply { this@apply.url = LOCAL_URL + END_POINT }
+        return StompClient(client, INTERVAL_MILLIS).apply { this@apply.url = EC2_URL + END_POINT }
     }
 
     @SuppressLint("CheckResult")

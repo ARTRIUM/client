@@ -89,7 +89,7 @@ class ChatDrawerActivity : AppCompatActivity() {
                 RoomApiService.instance.getRoom(roomId.toInt()){
                     val intent = Intent(this,ChatActivity::class.java)
                     val intentTemp = getIntent()
-                    intent.putExtra("user", intentTemp.getSerializableExtra("user"))
+                    intent.putExtra("user", user)
                     intent.putExtra("room", it)
                     startActivity(intent)
                 }

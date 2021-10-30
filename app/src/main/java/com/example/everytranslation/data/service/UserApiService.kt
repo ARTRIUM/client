@@ -8,7 +8,7 @@ import java.util.function.Consumer
 class UserApiService(private val restApiService: RestApiService) {
 
     suspend fun requestVerifyCode(email : String) : ApiResult<String>{
-        return requestVerifyCode(email)
+        return restApiService.requestVerifyCode(email)
     }
 
     suspend fun requestVerify(verifyEmailDTO: VerifyEmailDTO) : ApiResult<String>{
