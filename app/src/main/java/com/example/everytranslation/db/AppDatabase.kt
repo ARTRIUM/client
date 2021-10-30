@@ -11,7 +11,7 @@ import com.example.everytranslation.db.dto.ChatRoom
 import com.example.everytranslation.db.dto.Message
 import com.example.everytranslation.db.dto.User
 
-@Database(entities = [ChatRoom::class, Message::class, User::class], version = 2, exportSchema = false)
+@Database(entities = [ChatRoom::class, Message::class, User::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun messageDao() : MessageDao
     abstract fun roomDao() : RoomDao

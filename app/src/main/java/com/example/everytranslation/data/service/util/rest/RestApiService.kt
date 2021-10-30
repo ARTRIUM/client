@@ -27,7 +27,7 @@ interface RestApiService {
 
     // Friend
     @GET("/friends") fun getFriends() : Call<List<Friend>>
-    @POST("/friend") fun addFriend(@Body email : AddFriendDTO) : Call<String>
+    @POST("/friend") fun addFriend(@Body email : AddFriendDTO) : Call<AddFriendSuccessDto>
 
     // Room
     @POST("/room/create") fun createRoom(@Body createRoomDTO: CreateRoomDTO) : Call<Long>

@@ -14,7 +14,7 @@ object RestApiServiceGenerator {
     private val logger = Logger.getLogger(RestApiServiceGenerator.javaClass.name)
 
     private val LOCAL_URL = "http://10.0.2.2:8080/"
-    private val EC2_URL = "http://3.36.49.199" // 변경요망
+    private val EC2_URL = "http://3.36.49.199/" // 변경요망
 
     fun <S> createService(serviceClass: Class<S>): S {
         val cookieManager = CookieManager()
@@ -22,9 +22,9 @@ object RestApiServiceGenerator {
         val myCookieJar = JavaNetCookieJar(cookieManager)
 
         val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(15, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(100, TimeUnit.SECONDS)
+            .readTimeout(100, TimeUnit.SECONDS)
+            .writeTimeout(100, TimeUnit.SECONDS)
             .cookieJar(myCookieJar)
             .retryOnConnectionFailure(true)
             .build()
@@ -33,7 +33,7 @@ object RestApiServiceGenerator {
 
         val builder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl(LOCAL_URL)
+            .baseUrl(EC2_URL)
             .client(okHttpClient)
         val retrofit = builder.build()
         return retrofit.create(serviceClass)

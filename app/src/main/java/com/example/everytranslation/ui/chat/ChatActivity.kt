@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -52,6 +53,9 @@ class ChatActivity : AppCompatActivity() {
         val chatSend = findViewById<Button>(R.id.send)
         val backBtn = findViewById<Button>(R.id.back)
         val chatTextView = findViewById<EditText>(R.id.chat_text)
+        val chatName = findViewById<TextView>(R.id.chat_name)
+
+        chatName.text = room.roomName
 
         ChatActivityRecycleview.adapter=viewAdapter
         ChatActivityRecycleview.layoutManager=LinearLayoutManager(applicationContext)

@@ -39,7 +39,7 @@
                     android:drawableLeft="@drawable/ic_back_purple" />
                 <TextView
                     android:id="@+id/chat_name"
-                    android:text="이도윤"
+                    android:text="사용자"
                     android:textSize="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

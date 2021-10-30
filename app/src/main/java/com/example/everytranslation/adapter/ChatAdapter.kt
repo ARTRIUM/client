@@ -46,12 +46,13 @@ class ChatAdapter(val user : User) : RecyclerView.Adapter<RecyclerView.ViewHolde
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is LeftViewHolder) {
             holder.binding.textGchatMessageOther.text = lst[position].content
-            holder.binding.textGchatTimestampOther.text = lst[position].writtenAt
+            holder.binding.textGchatTimestampOther.text = lst[position].writtenAt.substring(11)
+            holder.binding.textGchatUserOther.text = lst[position].writtenBy
 
         }
         else if (holder is RightViewHolder) {
             holder.binding.textGchatMessageMe.text = lst[position].content
-            holder.binding.textGchatTimestampMe.text = lst[position].writtenAt
+            holder.binding.textGchatTimestampMe.text = lst[position].writtenAt.substring(11)
         }
     }
 
