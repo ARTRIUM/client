@@ -4,8 +4,9 @@ import com.example.everytranslation.data.model.CreateRoomDTO
 import com.example.everytranslation.data.model.EventInvite
 import com.example.everytranslation.data.service.util.rest.RestApiService
 import com.example.everytranslation.data.service.util.rest.RestApiServiceCallback
+import com.example.everytranslation.data.service.util.stomp.MyStompClient
 import com.example.everytranslation.db.dto.ChatRoom
-import com.example.everytranslation.utils.MyStompClient
+
 import com.google.gson.Gson
 import java.util.function.Consumer
 

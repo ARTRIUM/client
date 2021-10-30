@@ -1,7 +1,7 @@
 package com.example.everytranslation.data.service
 
 import com.example.everytranslation.data.model.EventInvite
-import com.example.everytranslation.utils.MyStompClient
+import com.example.everytranslation.data.service.util.stomp.MyStompClient
 import com.google.gson.Gson
 import io.reactivex.functions.Consumer
 
