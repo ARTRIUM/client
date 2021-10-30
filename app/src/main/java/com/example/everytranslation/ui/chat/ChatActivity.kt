@@ -47,8 +47,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
         binding.back.setOnClickListener { // 뒤로가기 버튼
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
         binding.chatMike.setOnClickListener { // 마이크버튼
             if (flag == 0) {
@@ -82,7 +81,7 @@ class ChatActivity : AppCompatActivity() {
 
         messageApiService.sendMessage(1,1,binding.chatText.text.toString());
 
-        
+
         binding.chatContent.adapter?.notifyDataSetChanged()
     }
 

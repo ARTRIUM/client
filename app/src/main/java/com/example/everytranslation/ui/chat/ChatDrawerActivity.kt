@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -20,6 +21,7 @@ import com.example.everytranslation.R
 import com.example.everytranslation.adapter.InviteListRecyclerViewAdapter
 import com.example.everytranslation.data.FriendDTO
 import com.example.everytranslation.data.model.CreateRoomDTO
+import com.example.everytranslation.data.model.EventInvite
 import com.example.everytranslation.data.model.UserLanguage
 import com.example.everytranslation.data.service.FriendApiService
 import com.example.everytranslation.data.service.RoomApiService
@@ -27,6 +29,7 @@ import com.example.everytranslation.data.service.util.rest.RestApiService.Compan
 import com.example.everytranslation.databinding.ActivityChatDrawerBinding
 import com.example.everytranslation.databinding.InviteDetailBinding
 import com.example.everytranslation.db.dto.Friend
+import com.example.everytranslation.db.dto.User
 import java.util.stream.Collector
 import java.util.stream.Collectors.toList
 import kotlin.streams.toList
@@ -36,14 +39,19 @@ class ChatDrawerActivity : AppCompatActivity() {
 
     private var friendList = ArrayList<Friend>()
     private var inviteList = ArrayList<Friend>()
+    lateinit var user : User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_drawer)
 
+        val intentTemp = getIntent()
+        user = intentTemp.getParcelableExtra("user")!!
+
+
         var viewAdapter = InviteListRecyclerViewAdapter(applicationContext,friendList,inviteList)
 
-        val chatNameText = findViewById<TextView>(R.id.chatNameText)
+        val chatName = findViewById<EditText>(R.id.chatName)
         val btn_make = findViewById<Button>(R.id.createRoom)
         val inviteListFragmentRecyclerview = findViewById<RecyclerView>(R.id.invitelistfragment_recyclerview)
 
@@ -67,26 +75,26 @@ class ChatDrawerActivity : AppCompatActivity() {
                 .toList()
 
 
-            val createRoom = CreateRoomDTO(inviteUserIdList, chatNameText.text.toString())
+            val createRoom = CreateRoomDTO(inviteUserIdList, chatName.text.toString())
+
             RoomApiService.instance.createRoom(createRoom){ roomId ->
-                Log.d("inviteList 회전 시작", "inviteList 회전 시작")
+                val eventInvite = EventInvite(chatName.text.toString(),roomId.toInt())
+                    for(invitedUserId in inviteUserIdList){
+                        RoomApiService.instance.sendGreetingEvent(invitedUserId, eventInvite)
+                    }
 
-                    //val eventInvite = EventInvite(input_roomname_text.text.toString(), user.name, roomId)
+                RoomApiService.instance.sendGreetingEvent(user.userId,eventInvite)
 
 
-                    //RoomApiService.instance.sendGreetingEvent(user.userId, invited.userId.toInt(), eventInvite)
+                RoomApiService.instance.getRoom(roomId.toInt()){
+                    val intent = Intent(this,ChatActivity::class.java)
+                    val intentTemp = getIntent()
+                    intent.putExtra("user", intentTemp.getSerializableExtra("user"))
+                    intent.putExtra("room", it)
+                    startActivity(intent)
                 }
-                //RoomApiService.instance.sendGreetingEvent(user.userId, user.userId, eventInvite)
 
-
-//                RoomApiService.instance.getRoom(roomId){
-//                    Log.d("터지니?", it.toString())
-//
-//                    val intent = Intent(activity, MessageChatActivity::class.java)
-//                    intent.putExtra("user", user)
-//                    intent.putExtra("room", it)
-//                    startActivity(intent)
-//                }
+            }
 
             }
         }

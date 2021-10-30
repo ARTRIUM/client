@@ -24,6 +24,7 @@ import com.example.everytranslation.utils.toast
 class HomeFragment(val user : User) : Fragment(), HomeListener {
 
     companion object{
+
         fun newInstance(user : User) : HomeFragment {
             Log.d("user:{}",user.name.toString());
             return HomeFragment(user)
@@ -63,8 +64,8 @@ class HomeFragment(val user : User) : Fragment(), HomeListener {
 
         fragmentbinding.meetStart.setOnClickListener{
             var intent = Intent(getActivity(),ChatDrawerActivity::class.java)
+            intent.putExtra("user",user)
             startActivity(intent)
-//            viewModel.startMeet()
         }
 
         //tool bar
