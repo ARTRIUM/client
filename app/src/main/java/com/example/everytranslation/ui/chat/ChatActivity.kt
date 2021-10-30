@@ -1,8 +1,11 @@
 package com.example.everytranslation.ui.chat
 
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -12,22 +15,27 @@ import com.example.everytranslation.MainActivity
 import com.example.everytranslation.R
 import com.example.everytranslation.data.ChatDTO
 import com.example.everytranslation.data.model.ChatMeDTO
+import com.example.everytranslation.data.model.ResultTransferPapago
 import com.example.everytranslation.data.service.MessageApiService
+import com.example.everytranslation.data.service.util.rest.PapagoApiService
 import com.example.everytranslation.databinding.ActivityChatBinding
 import com.example.everytranslation.databinding.ChatDetailBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.net.HttpURLConnection
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.*
 
 class ChatActivity : AppCompatActivity() {
-
-
     private val messageApiService = MessageApiService.getNewInstance()
 
     private lateinit var binding: ActivityChatBinding
     private var flag: Int = 0
     private val data = arrayListOf<ChatMeDTO>()
 
+    var api = PapagoApiService.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +73,21 @@ class ChatActivity : AppCompatActivity() {
             addChat()
             binding.chatText.setText("")
         }
+
+        api.transferPapago("ko", "en", "테스트입니다. 번역해주세요.").enqueue(object : Callback<ResultTransferPapago> {
+            override fun onResponse(
+                call: Call<ResultTransferPapago>,
+                response: Response<ResultTransferPapago>
+            ) {
+                //성공
+                Log.d(TAG, "성공 : ${response.raw()}")
+            }
+
+            override fun onFailure(call: Call<ResultTransferPapago>, t: Throwable) {
+                // 실패
+                Log.d(TAG, "실패 : $t")
+            }
+        })
     }
 
     private fun changeImage(image: Int) {
@@ -81,7 +104,6 @@ class ChatActivity : AppCompatActivity() {
 //        val chat = ChatDTO();
 
         messageApiService.sendMessage(1,1,binding.chatText.text.toString());
-
         
         binding.chatContent.adapter?.notifyDataSetChanged()
     }

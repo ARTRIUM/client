@@ -9,8 +9,6 @@ import retrofit2.http.*
 import java.io.File
 
 interface RestApiService {
-
-
     // User
     @GET("/user/verify/{requestEmail}") suspend fun requestVerifyCode(@Path("requestEmail") email: String) : ApiResult<String>
     @POST("/user/verify") suspend fun requestVerify(@Body verifyEmailDTO : VerifyEmailDTO) : ApiResult<String>
