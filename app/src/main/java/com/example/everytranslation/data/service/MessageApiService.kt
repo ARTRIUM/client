@@ -2,11 +2,13 @@ package com.example.everytranslation.data.service
 
 
 
+import android.util.Log
+import com.example.everytranslation.data.ChatDTO
 import com.example.everytranslation.data.service.util.rest.RestApiService
 import com.example.everytranslation.data.service.util.rest.RestApiServiceCallback
+import com.example.everytranslation.data.service.util.stomp.MyStompClient
 import com.example.everytranslation.db.dto.Message
-import com.example.everytranslation.utils.MyStompClient
-import java.util.function.Consume
+import java.util.function.Consumer
 import java.util.logging.Logger
 
 class MessageApiService() {
@@ -36,6 +38,8 @@ class MessageApiService() {
 
     fun subscribeRoom(roomId: Int, callback: Consumer<Message>){
         myStompService.subscribe(receiveEndPointPrefix + roomId, Message::class.java){
+            Log.d("전송한사람 {}",it.writtenAt!!)
+            Log.d("전송한내용 {}",it.content)
             callback.accept(it)
         }
     }

@@ -15,6 +15,8 @@ import com.example.everytranslation.data.model.ChatMeDTO
 import com.example.everytranslation.data.service.MessageApiService
 import com.example.everytranslation.databinding.ActivityChatBinding
 import com.example.everytranslation.databinding.ChatDetailBinding
+import com.example.everytranslation.db.dto.ChatRoom
+import com.example.everytranslation.db.dto.User
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.*
@@ -27,6 +29,8 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
     private var flag: Int = 0
     private val data = arrayListOf<ChatMeDTO>()
+    private lateinit var user : User
+    private lateinit var room : ChatRoom
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +41,9 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        user = intent.getParcelableExtra("user")!!
+        room = intent.getParcelableExtra("room")!!
 
         binding.chatContent.adapter = ChatAdapter(data)
         binding.chatContent.layoutManager = LinearLayoutManager(this)
@@ -77,9 +84,10 @@ class ChatActivity : AppCompatActivity() {
         val t_dateFormat = SimpleDateFormat("kk:mm", Locale("ko", "KR"))
         val str_time = t_dateFormat.format(t_date)
 
-//        val chat = ChatDTO();
+        messageApiService.sendMessage(user.userId.toInt(),room.roomId, binding.chatText.text.toString());
 
-        messageApiService.sendMessage(1,1,binding.chatText.text.toString());
+        val chat = ChatMeDTO(binding.chatText.text.toString(), str_time, false)
+        data.add(chat)
 
 
         binding.chatContent.adapter?.notifyDataSetChanged()

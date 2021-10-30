@@ -23,7 +23,11 @@ data class Message (
     @ColumnInfo(name="content")
     val content : String,
 
-    @SerializedName("userName")
+    @SerializedName("language")
+    @ColumnInfo(name="language")
+    val language : String,
+
+    @SerializedName("writtenBy")
     @ColumnInfo(name="written_by")
     val writtenBy : String,
 
