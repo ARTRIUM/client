@@ -20,11 +20,14 @@ import com.example.everytranslation.utils.MyApplication
 class AddFriendActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAddFriendBinding
+    private lateinit var user : User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddFriendBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        user = intent.getParcelableExtra("user")!!
 
         binding.addFriendBtn.setOnClickListener{
             val friendText = binding.addFriendText.text.toString()
@@ -32,7 +35,7 @@ class AddFriendActivity : AppCompatActivity() {
             FriendApiService.instance.addFriend(AddFriendDTO(friendText)) {
 
                 if (friendText.contains('@') && it.success) {
-                    Toast.makeText(this, it.friendName + "을 추가하였습니다.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "친구 추가에 성공하였습니다.", Toast.LENGTH_LONG).show()
                     //Log.d("주석", it.friendName)
                     finish()
                 }
@@ -48,7 +51,7 @@ class AddFriendActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.addFriendMyEmail.text = MyApplication.prefs.getUserEmail()
+        binding.addFriendMyEmail.text = user.email
     }
 
 }

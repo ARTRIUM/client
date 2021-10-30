@@ -68,7 +68,7 @@ class SignInActivity : AppCompatActivity(),AuthListener {
                 MyApplication.prefs.setUserLanguage(it.response.userLanguage)
 
                 Thread{
-                    val user = User(it.response.userId, it.response.userName, MyApplication.prefs.getUserPass(), MyApplication.prefs.getUserEmail(), "", it.response.userLanguage)
+                    val user = User(it.response.userId, it.response.userName, binding.loginPassword.text.toString(), binding.loginEmail.text.toString(), "", it.response.userLanguage)
                     AppDatabase.getInstance(applicationContext).userDao().insert(user)
                 }.start()
 
