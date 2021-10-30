@@ -7,7 +7,7 @@ import com.example.everytranslation.db.dto.Message
 @Dao
 interface MessageDao {
     @Query("SELECT * FROM MESSAGE WHERE room_id== :roomId")
-    fun getAll(roomId : Long) : LiveData<List<Message>>
+    fun getAll(roomId : Int) : LiveData<List<Message>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(message: Message)

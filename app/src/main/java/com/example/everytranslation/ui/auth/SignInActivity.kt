@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.everytranslation.MainActivity
 import com.example.everytranslation.R
-import com.example.everytranslation.data.repository.AuthRepository
 import com.example.everytranslation.databinding.ActivityLoginBinding
 import com.example.everytranslation.db.AppDatabase
 import com.example.everytranslation.ui.auth.AuthListener
@@ -55,7 +54,7 @@ class SignInActivity : AppCompatActivity(),AuthListener {
     }
 
     private fun initViewModel(){
-        viewModelFactory = AuthViewModelFactory(AuthRepository())
+        viewModelFactory = AuthViewModelFactory()
         viewModel = ViewModelProvider(this,viewModelFactory).get(AuthViewModel::class.java)
         viewModel.authSignInListener = this
         viewModel.isSelected.set(false)
