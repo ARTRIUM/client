@@ -23,6 +23,10 @@ data class Message (
     @ColumnInfo(name="content")
     val content : String,
 
+    @SerializedName("language")
+    @ColumnInfo(name="language")
+    val language : String,
+
     @SerializedName("userName")
     @ColumnInfo(name="written_by")
     val writtenBy : String,
@@ -30,4 +34,8 @@ data class Message (
     @SerializedName("writtenAt")
     @ColumnInfo(name="written_at")
     val writtenAt : String,
+
+    @SerializedName("type")
+    @ColumnInfo(name="type")
+    val type: Int
 )

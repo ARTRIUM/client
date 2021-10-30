@@ -3,33 +3,64 @@ package com.example.everytranslation.ui.chat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.everytranslation.R
 import com.example.everytranslation.data.model.ChatMeDTO
 import com.example.everytranslation.databinding.ChatMeBinding
+import com.example.everytranslation.databinding.ChatOtherBinding
+import com.example.everytranslation.db.dto.Message
+import java.lang.RuntimeException
 
-class ChatAdapter(private val dataSet: List<ChatMeDTO>) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
-    class ChatViewHolder(val binding : ChatMeBinding) : RecyclerView.ViewHolder(binding.root) {
-        val text: TextView
-            get(){
-                TODO()
+class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val lst = mutableListOf<Message>()
+    val LEFT_TALK = 0   // 타인
+    val RIGHT_TALK = 1  // 본인
+
+    private lateinit var chatMeBinding: ChatMeBinding       // right
+    private lateinit var chatOtherBinding: ChatOtherBinding // left
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when(viewType) {
+            LEFT_TALK -> {
+                chatOtherBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.chat_other, parent, false)
+                LeftViewHolder(chatOtherBinding)
             }
-    }
+            RIGHT_TALK -> {
+                chatMeBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.chat_me, parent, false)
+                RightViewHolder(chatMeBinding)
+            }
+            else -> {
+                throw RuntimeException("알 수 없는 viewtype error")
+            }
+        }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_me, parent, false)
-        return ChatViewHolder(ChatMeBinding.bind(view))
-
-    }
-
-    override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        val listPosition = dataSet[position]
-        holder.binding.textGchatMessageMe.text = listPosition.text
-        holder.binding.textGchatTimestampMe.text = listPosition.time
     }
 
     override fun getItemCount(): Int {
-        return dataSet.size
+        return lst.size
     }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is LeftViewHolder) {
+            holder.binding.textGchatMessageOther.text = lst[position].content
+        }
+        else if (holder is RightViewHolder) {
+            holder.binding.textGchatMessageMe.text = lst[position].content
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return lst[position].type   // 0은 남, 1은 자신
+    }
+
+    inner class LeftViewHolder(val binding : ChatOtherBinding) : RecyclerView.ViewHolder(binding.root){ }
+    inner class RightViewHolder(val binding : ChatMeBinding) : RecyclerView.ViewHolder(binding.root){ }
+
+    fun addChat(message: Message) {
+        lst.add(message)
+    }
+
+
 
 }
