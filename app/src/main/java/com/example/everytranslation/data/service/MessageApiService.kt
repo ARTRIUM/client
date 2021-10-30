@@ -4,8 +4,7 @@ package com.example.everytranslation.data.service
 
 import com.example.everytranslation.data.ChatDTO
 import com.example.everytranslation.data.service.util.rest.RestApiService
-import com.example.everytranslation.data.service.util.rest.RestApiServiceCallback
-import com.example.everytranslation.utils.MyStompClient
+import com.example.everytranslation.data.service.util.stomp.MyStompClient
 import io.reactivex.functions.Consumer
 import java.util.logging.Logger
 
