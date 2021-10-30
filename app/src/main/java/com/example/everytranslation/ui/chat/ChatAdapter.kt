@@ -10,9 +10,10 @@ import com.example.everytranslation.data.model.ChatMeDTO
 import com.example.everytranslation.databinding.ChatMeBinding
 import com.example.everytranslation.databinding.ChatOtherBinding
 import com.example.everytranslation.db.dto.Message
+import com.example.everytranslation.db.dto.User
 import java.lang.RuntimeException
 
-class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatAdapter(val user : User) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val lst = mutableListOf<Message>()
     val LEFT_TALK = 0   // 타인
     val RIGHT_TALK = 1  // 본인
@@ -44,14 +45,19 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is LeftViewHolder) {
             holder.binding.textGchatMessageOther.text = lst[position].content
+            holder.binding.textGchatTimestampOther.text = lst[position].writtenAt
+
         }
         else if (holder is RightViewHolder) {
             holder.binding.textGchatMessageMe.text = lst[position].content
+            holder.binding.textGchatTimestampMe.text = lst[position].writtenAt
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return lst[position].type   // 0은 남, 1은 자신
+        if (user.userId.toInt() == this.lst[position].userId)
+            return RIGHT_TALK
+        return LEFT_TALK
     }
 
     inner class LeftViewHolder(val binding : ChatOtherBinding) : RecyclerView.ViewHolder(binding.root){ }

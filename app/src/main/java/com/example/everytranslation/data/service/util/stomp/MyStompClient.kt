@@ -1,4 +1,4 @@
-package com.example.everytranslation.utils
+package com.example.everytranslation.data.service.util.stomp
 
 import android.annotation.SuppressLint
 import android.util.Log

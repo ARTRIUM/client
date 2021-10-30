@@ -1,13 +1,11 @@
 package com.example.everytranslation.data
 
-import com.example.everytranslation.data.model.UserLanguage
-
 data class ChatDTO(
-
-
-    var userId : Long? = null,
-    var userName : String? = null,
-    var chatId : Long? = null,
-    var message : String? = null,
-    var language: UserLanguage? = null
+    var messageId: Long,
+    var userId : Long,
+    var roomId : Long,
+    var message : String,
+    var language: String,
+    var writtenAt : String,
+    var writtenDy : String
 )

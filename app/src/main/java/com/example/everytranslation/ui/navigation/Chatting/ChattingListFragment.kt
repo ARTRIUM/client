@@ -34,13 +34,20 @@ class ChattingListFragment(val user : User) : Fragment() {
         }
     }
 
-    lateinit var adapter : ChattingListAdapter
+    lateinit var viewAdapter : ChattingListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
 
         val view:View = inflater.inflate(R.layout.fragment_chatting_list, container, false)
         val btn_addRoom : Button = view.findViewById(R.id.chatlist_add_friends);
+        val chattingListFragment = view.findViewById<RecyclerView>(R.id.chattinglistfragment_recyclerview)
+
+        viewAdapter = ChattingListAdapter(requireContext(), user, requireActivity())
+
+        chattingListFragment.adapter=viewAdapter
+        chattingListFragment.layoutManager=LinearLayoutManager(context)
+        chattingListFragment.setHasFixedSize(true)
 
         btn_addRoom.setOnClickListener(){
             val intent = Intent(activity, ChatActivity::class.java )
@@ -55,11 +62,10 @@ class ChattingListFragment(val user : User) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ChattingListAdapter(requireContext(), user, requireActivity())
 
         val db = AppDatabase.getInstance(requireContext())
         db.roomDao().getAll().observe(viewLifecycleOwner){
-            adapter.setRooms(it)
+            viewAdapter.setRooms(it)
             observerNewMessage(it, db)
         }
     }
@@ -68,7 +74,7 @@ class ChattingListFragment(val user : User) : Fragment() {
         for(room in rooms) {
             db.messageDao().getAll(room.roomId).observe(viewLifecycleOwner) { messages ->
                 if(messages.isNotEmpty())
-                    adapter.notifyItemChangedBy(room.roomId, messages.last())
+                    viewAdapter.notifyItemChangedBy(room.roomId, messages.last())
             }
         }
     }

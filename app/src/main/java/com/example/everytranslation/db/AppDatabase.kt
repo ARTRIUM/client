@@ -11,7 +11,7 @@ import com.example.everytranslation.db.dto.ChatRoom
 import com.example.everytranslation.db.dto.Message
 import com.example.everytranslation.db.dto.User
 
-@Database(entities = [ChatRoom::class, Message::class, User::class], version = 1, exportSchema = false)
+@Database(entities = [ChatRoom::class, Message::class, User::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun messageDao() : MessageDao
     abstract fun roomDao() : RoomDao
@@ -23,7 +23,9 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context : Context) : AppDatabase {
             if (instance == null) {
                 synchronized(AppDatabase::class) {
-                    instance = Room.databaseBuilder(context, AppDatabase::class.java, "MY_DB").build()
+                    instance = Room.databaseBuilder(context, AppDatabase::class.java, "MY_DB")
+                        .fallbackToDestructiveMigration()
+                        .build()
                 }
             }
             return instance as AppDatabase
