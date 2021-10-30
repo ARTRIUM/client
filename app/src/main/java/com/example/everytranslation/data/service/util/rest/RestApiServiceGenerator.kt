@@ -32,7 +32,7 @@ object RestApiServiceGenerator {
         val gson = GsonBuilder().setLenient().create()
 
         val builder = Retrofit.Builder()
-            //.addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .baseUrl(LOCAL_URL)
             .client(okHttpClient)
         val retrofit = builder.build()

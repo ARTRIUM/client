@@ -12,7 +12,7 @@ import java.io.File
 interface RestApiService {
 
     // Friend API
-    @POST("/api/friend")
+    @POST("/friend")
     fun addFriend(@Body email : AddFriendDTO) : Call<String>
 
     companion object {
