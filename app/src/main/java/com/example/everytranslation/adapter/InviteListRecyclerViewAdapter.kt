@@ -27,6 +27,7 @@ class InviteListRecyclerViewAdapter(val context: Context,val friendList: ArrayLi
 
             fun bind(friend: Friend,context:Context) {
                 name?.text = friend.name
+                national?.text=friend.language
 
                 checkBox?.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) {

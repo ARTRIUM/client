@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    >
 
     <ImageView
         android:id="@+id/invite_image_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:gravity="center_vertical"
-        android:src="@drawable/people"/>
+        android:src="@drawable/ic_add_friend"/>
 
     <TextView
         android:id="@+id/invite_name"
@@ -20,7 +21,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="10dp"
         android:paddingVertical="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/everygreen"
         android:textStyle="bold" />
 
     <Button
@@ -44,7 +45,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/chat_box"
         android:textSize="8dp"
         />
 
