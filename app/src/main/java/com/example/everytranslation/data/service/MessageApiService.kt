@@ -2,11 +2,11 @@ package com.example.everytranslation.data.service
 
 
 
-import com.example.everytranslation.data.ChatDTO
 import com.example.everytranslation.data.service.util.rest.RestApiService
 import com.example.everytranslation.data.service.util.rest.RestApiServiceCallback
+import com.example.everytranslation.db.dto.Message
 import com.example.everytranslation.utils.MyStompClient
-import io.reactivex.functions.Consumer
+import java.util.function.Consumer
 import java.util.logging.Logger
 
 class MessageApiService() {
@@ -24,14 +24,18 @@ class MessageApiService() {
         }
     }
 
+    fun getAllMessages(roomId:Int,callback: Consumer<List<Message>>){
+        restApiService.getMessages(roomId).enqueue(RestApiServiceCallback(callback))
+    }
+
     // 현재방 이름에 대한 메세지를 들고오는 것 ( 아마 어플을 실행할때 쓰는 API )
 
 //    fun getAllMessages(roomId: Int, callback: Consumer<List<ChatDTO>>){
 //        restApiService.getMessages(roomId).enqueue(RestApiServiceCallback(callback))
 //    }
 
-    fun subscribeRoom(roomId: Int, callback: Consumer<ChatDTO>){
-        myStompService.subscribe(receiveEndPointPrefix + roomId, ChatDTO::class.java){
+    fun subscribeRoom(roomId: Int, callback: Consumer<Message>){
+        myStompService.subscribe(receiveEndPointPrefix + roomId, Message::class.java){
             callback.accept(it)
         }
     }

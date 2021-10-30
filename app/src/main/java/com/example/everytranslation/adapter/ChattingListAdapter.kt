@@ -45,7 +45,7 @@ class ChattingListAdapter(val context: Context, val user : User, val activity: A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.chat_detail, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_detail, parent, false)
         return Holder(view)
     }
 
@@ -78,6 +78,7 @@ class ChattingListAdapter(val context: Context, val user : User, val activity: A
     fun notifyItemChangedBy(roomId:Int, message:Message){
         if(!roomPositionTable.containsKey(roomId))
             throw IllegalArgumentException("adapter does not have roomId")
+
         notifyItemChanged(roomPositionTable.get(roomId)!!, message)
     }
 
