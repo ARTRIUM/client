@@ -68,7 +68,6 @@
         <activity
             android:name=".ui.chat.ChatActivity"
             android:windowSoftInputMode="adjustResize">
-
         </activity>
         <activity android:name=".ui.navigation.home.MeetingReservationActivity" />
         <activity android:name=".ui.auth.ResetPasswordActivity" />

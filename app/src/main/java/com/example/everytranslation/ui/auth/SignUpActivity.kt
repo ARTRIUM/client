@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.everytranslation.R
-import com.example.everytranslation.data.repository.AuthRepository
 import com.example.everytranslation.databinding.ActivitySignUpBinding
 import com.example.everytranslation.ui.auth.AuthListener
 import com.example.everytranslation.ui.auth.AuthViewModel
@@ -34,7 +33,7 @@ class SignUpActivity : AppCompatActivity() , AuthListener{
     }
 
     private fun initViewModel(){
-        viewModelFactory = AuthViewModelFactory(AuthRepository())
+        viewModelFactory = AuthViewModelFactory()
         viewModel = ViewModelProvider(this,viewModelFactory).get(AuthViewModel::class.java)
         viewModel.authSignUpListener = this
         binding.viewmodel = viewModel

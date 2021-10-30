@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.everytranslation.MainActivity
 import com.example.everytranslation.R
-import com.example.everytranslation.data.repository.HomeRepository
 import com.example.everytranslation.databinding.FragmentHomeBinding
 import com.example.everytranslation.ui.activity.MypageActivity
 import com.example.everytranslation.ui.chat.ChatActivity
@@ -70,7 +69,7 @@ class HomeFragment : Fragment(), HomeListener {
     }
 
     private fun initViewModel(){
-        viewModelFactory = HomeViewModelFactory(HomeRepository())
+        viewModelFactory = HomeViewModelFactory()
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
         viewModel.homeListener = this
         fragmentbinding.viewModel = viewModel
