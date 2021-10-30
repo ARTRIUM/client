@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.everytranslation.MainActivity
 import com.example.everytranslation.R
 import com.example.everytranslation.databinding.FragmentHomeBinding
+import com.example.everytranslation.db.dto.User
 import com.example.everytranslation.ui.activity.MypageActivity
 import com.example.everytranslation.ui.chat.ChatActivity
 import com.example.everytranslation.ui.chat.ChatDrawerActivity
@@ -20,11 +21,13 @@ import com.example.everytranslation.utils.NetworkConnection
 import com.example.everytranslation.utils.NetworkStatus
 import com.example.everytranslation.utils.toast
 
-class HomeFragment : Fragment(), HomeListener {
+class HomeFragment(val user : User) : Fragment(), HomeListener {
 
     companion object{
-        fun newInstance() : HomeFragment {
-            return HomeFragment()
+
+        fun newInstance(user : User) : HomeFragment {
+            Log.d("user:{}",user.name.toString());
+            return HomeFragment(user)
         }
     }
 
@@ -49,6 +52,11 @@ class HomeFragment : Fragment(), HomeListener {
 
         initViewModel()
 
+        if (user.language == "KOREAN")
+            fragmentbinding.meetText.text = "안녕하세요, " + user.name + "님!"
+        else if (user.language == "ENGLISH")
+            fragmentbinding.meetText.text = "Hello, " + user.name + "!"
+
         fragmentbinding.meetReservation.setOnClickListener {
             val intent = Intent(getActivity(), MeetingReservationActivity::class.java)
             startActivity(intent)
@@ -56,8 +64,8 @@ class HomeFragment : Fragment(), HomeListener {
 
         fragmentbinding.meetStart.setOnClickListener{
             var intent = Intent(getActivity(),ChatDrawerActivity::class.java)
+            intent.putExtra("user",user)
             startActivity(intent)
-//            viewModel.startMeet()
         }
 
         //tool bar
@@ -65,6 +73,8 @@ class HomeFragment : Fragment(), HomeListener {
             val intent = Intent(activity, MypageActivity::class.java)
             startActivity(intent)
         }
+
+
         return fragmentbinding.root
     }
 
