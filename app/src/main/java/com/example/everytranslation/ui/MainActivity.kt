@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.action_home -> {
-                        homeFragment = HomeFragment.newInstance()
+                        homeFragment = HomeFragment.newInstance(user)
                         supportFragmentManager.beginTransaction().replace(R.id.main_content,homeFragment).commit()
                         return@setOnItemSelectedListener true
                     }

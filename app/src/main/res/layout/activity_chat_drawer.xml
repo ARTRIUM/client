@@ -85,7 +85,6 @@
                     android:background="@drawable/btn_round_background_purple"
                     android:cursorVisible="true"
                     android:fontFamily="@font/wemakeregular"
-                    android:hint="이도윤"
                     android:paddingLeft="15dp"
                     android:textColorHint="@color/purple"
                     android:textSize="12sp" />
