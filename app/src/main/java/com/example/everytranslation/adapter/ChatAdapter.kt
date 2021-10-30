@@ -67,12 +67,13 @@ class ChatAdapter(val user : User) : RecyclerView.Adapter<RecyclerView.ViewHolde
         if (holder is LeftViewHolder) {
             holder.binding.textGchatMessageOther.text = lst[position].content
             holder.binding.textGchatMessageOtherTranslation.text=convertMessage(lst[position].content,position)
-            holder.binding.textGchatTimestampOther.text = lst[position].writtenAt
+            holder.binding.textGchatTimestampOther.text = lst[position].writtenAt.substring(11)
+            holder.binding.textGchatUserOther.text = lst[position].writtenBy
 
         }
         else if (holder is RightViewHolder) {
             holder.binding.textGchatMessageMe.text = lst[position].content
-            holder.binding.textGchatTimestampMe.text = lst[position].writtenAt
+            holder.binding.textGchatTimestampMe.text = lst[position].writtenAt.substring(11)
         }
     }
 

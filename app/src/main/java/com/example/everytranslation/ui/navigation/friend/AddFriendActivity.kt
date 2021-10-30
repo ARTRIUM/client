@@ -20,35 +20,38 @@ import com.example.everytranslation.utils.MyApplication
 class AddFriendActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAddFriendBinding
+    private lateinit var user : User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddFriendBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        user = intent.getParcelableExtra("user")!!
+
         binding.addFriendBtn.setOnClickListener{
             val friendText = binding.addFriendText.text.toString()
 
-            if(friendText.contains('@')) {
+            FriendApiService.instance.addFriend(AddFriendDTO(friendText)) {
 
-                FriendApiService.instance.addFriend(AddFriendDTO(friendText)) {
-                    Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-                    Log.d("주석", it)
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                if (friendText.contains('@') && it.success) {
+                    Toast.makeText(this, "친구 추가에 성공하였습니다.", Toast.LENGTH_LONG).show()
+                    //Log.d("주석", it.friendName)
+                    finish()
+                }
+                else{
+                    Toast.makeText(this,"친구 추가에 실패하셨습니다.",Toast.LENGTH_LONG).show()
                 }
             }
 
-            else{
-                Toast.makeText(this,"친구 추가에 실패하셨습니다.",Toast.LENGTH_LONG).show()
-            }
+
+
         }
         binding.addFriendExit.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
-        binding.addFriendMyEmail.text = MyApplication.prefs.getUserEmail()
+        binding.addFriendMyEmail.text = user.email
     }
 
 }

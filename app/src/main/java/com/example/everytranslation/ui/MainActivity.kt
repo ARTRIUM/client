@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             setOnItemSelectedListener {
                 when(it.itemId){
                     R.id.action_people_list -> {
-                        friendsListFragment = FriendsListFragment.newInstance()
+                        friendsListFragment = FriendsListFragment.newInstance(user)
                         supportFragmentManager.beginTransaction().replace(R.id.main_content,friendsListFragment).commit()
                         return@setOnItemSelectedListener true
                     }
