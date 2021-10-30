@@ -73,7 +73,7 @@ class SignInActivity : AppCompatActivity(),AuthListener {
                 }.start()
 
                 val intent = Intent(this,MainActivity::class.java)
-                intent.putExtra("user", User(it.response.userId, it.response.userName, MyApplication.prefs.getUserPass(), MyApplication.prefs.getUserEmail(), "", it.response.userLanguage))
+                intent.putExtra("user", User(it.response.userId, it.response.userName, binding.loginPassword.text.toString(), binding.loginEmail.text.toString(), "", it.response.userLanguage))
                 startActivity(intent)
                 finish()
             }
